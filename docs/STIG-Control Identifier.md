@@ -62,7 +62,7 @@ Now enabled:
 
 
 ## 6. Automated Remediation (PowerShell Script)
-Set the **Machine inactivity limit** to 900 seconds (15 minutes).  
+Require a password when a computer wakes (on battery)" to Enabled
 ```powershell
 <#
 .SYNOPSIS
