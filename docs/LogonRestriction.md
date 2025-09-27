@@ -47,7 +47,8 @@ Check current assignments via **Local Security Policy**:
 - Open `secpol.msc` → Security Settings → Local Policies → User Rights Assignment → "Access this computer from the network".  
 - Verify which groups/users are listed.  
 
-**Image Placeholder** – *Insert screenshot of initial assignments here*
+<img width="656" height="112" alt="image" src="https://github.com/user-attachments/assets/7e8a172c-7b22-401e-aab2-1ab75c636221" />
+
 
 ---
 
@@ -61,7 +62,8 @@ Check current assignments via **Local Security Policy**:
    - **Remote Desktop Users**  
 4. Apply changes and close the editor.  
 
-**Image Placeholder** – *Insert screenshot showing corrected assignments*  
+<img width="1920" height="978" alt="image" src="https://github.com/user-attachments/assets/5781128c-9a35-4dec-a0d2-47395e2a2d3a" />
+ 
 
 ---
 
