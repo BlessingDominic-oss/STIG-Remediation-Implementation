@@ -1,18 +1,41 @@
-# STIG Control: WN10-CC-000145
+# STIG Control: WN10-CC-000145  
 
 ## 1. STIG Control Identifier  
-**ID:** WN10-CC-000145 
-**Title:** Windows 10 must be configured to lock the screen after 15 minutes of inactivity.  
+**ID:** WN10-CC-000145  
+**Title:** Users must be prompted for a password on resume from sleep (on battery).  
 
-## 2. Problem Statement / Vulnerability 
+## 2. Problem Statement / Vulnerability  
 
-Issue
-* Inactive sessions can expose systems to unauthorized use. Configuring automatic lock reduces the attack window. 
+**Issue**  
+* If the system does not require a password when resuming from sleep, unauthorized users could gain access to data.  
 
-Risk
-* Leaving sessions open allows attackers to access sensitive data. Locking after inactivity enforces secure use. 
+**Risk**  
+* Leaving a computer unattended while on battery without re-authentication exposes sensitive data and increases the risk of compromise.  
 
-## 3. Before Remediation (Initial State)
+
+## 3. STIG Cross-References with Frameworks  
+
+**WN10-CC-000145 – Users must be prompted for a password on resume from sleep (on battery)**  
+
+- **HIPAA (164.312(a)(2)(iii))**: Requires automatic logoff or session lock to protect ePHI.  
+  *Source: HIPAA Security Rule*  
+
+- **PCI-DSS v4.0 (8.2.8)**: Sessions must be re-authenticated upon reactivation to protect cardholder data.  
+  *Source: PCI-DSS Standard*  
+
+- **ISO 27001 (A.9.2.6)**: Secure log-on procedures must be enforced when returning from idle or sleep states.  
+  *Source: ISO 27001:2022*  
+
+- **NIST 800-53 (AC-11 / AC-11(1))**: Session lock must be enforced after inactivity and require re-authentication to resume.  
+  *Source: NIST SP 800-53 Revision 5*  
+
+- **GDPR (32.1(b))**: Ensures appropriate technical measures are in place to secure personal data against unauthorized access.  
+  *Source: EU GDPR*
+  
+> <img width="137" height="203" alt="image" src="https://github.com/user-attachments/assets/9e80911f-8fca-43d4-859c-5c84255a9bb1" /> <img width="604" height="149" alt="image" src="https://github.com/user-attachments/assets/35cd25bd-1360-45c1-947f-858a566c419c" />
+
+
+## 4. Before Remediation (Initial State)
 Before remediation:
 > <a href="https://ibb.co/ymNqb019"><img src="https://i.ibb.co/8nm9SMpC/image.png" alt="image" border="0"></a>
 
@@ -20,17 +43,25 @@ The registry key doesn’t exist at all on our VM.
 > <a href="https://ibb.co/tP27FBn1"><img src="https://i.ibb.co/vvd7R1fM/image.png" alt="image" border="0"></a>
   
 
-## 4. Manual Remediation  
-1. Open **Group Policy Editor** (`gpedit.msc`).  
-2. Navigate to:  
-   `Computer Configuration → Windows Settings → Security Settings → Local Policies → Security Options`.  
-3. Verify **Interactive logon: Machine inactivity limit** is set to **900 seconds (15 minutes)** or less.  
+## 5. Manual Remediation  
 
- [ Group Policy setting Machine Inactivity Limit]
-> <img width="1794" height="942" alt="image" src="https://github.com/user-attachments/assets/0483f252-e533-4bba-9ead-58055de751cc" />
+via Group Policy:  
+- Open `gpedit.msc`.  
+- Navigate to:  
+  `Computer Configuration → Administrative Templates → System → Power Management → Sleep Settings`  
+- Configure **"Require a password when a computer wakes (on battery)"** to **Enabled**.
+
+  <img width="1471" height="841" alt="image" src="https://github.com/user-attachments/assets/ca81d9f3-4d18-4dd5-bdb1-3950945a5d2e" />
+Here's not enabled:                                                                                                                     
+  > <img width="1001" height="889" alt="image" src="https://github.com/user-attachments/assets/240fa6ed-188b-4b86-8697-e14e99f335db" /> 
+
+Now enabled:
+> <img width="1022" height="951" alt="image" src="https://github.com/user-attachments/assets/ce75103f-b773-4376-ae1d-f50e4d42db94" />
 
 
-## 5. Automated Remediation (PowerShell Script)
+
+
+## 6. Automated Remediation (PowerShell Script)
 Set the **Machine inactivity limit** to 900 seconds (15 minutes).  
 ```powershell
 <#
@@ -67,7 +98,7 @@ Write-Host "`n=== Remediation Complete ==="
 <img width="1229" height="691" alt="image" src="https://github.com/user-attachments/assets/608cbf94-13b8-4431-b6cc-cd7b426a89f5" />
 
 
-## 6. Testing / Verification
+## 7. Testing / Verification
 1. Script
 ```powershell
 Write-Host "=== Verifying STIG WN10-CC-000145 ===`n"
@@ -95,22 +126,11 @@ Write-Host "`n=== Verification Complete ==="
    
 <img width="1270" height="246" alt="image" src="https://github.com/user-attachments/assets/abd232b2-aaa5-455a-af8d-961830ce13a2" />
 
-4. Nessus / STIG Scan Pass
+3. Nessus / STIG Scan Pass
+<img width="793" height="43" alt="image" src="https://github.com/user-attachments/assets/6ce734ac-a3a5-4d8a-a485-e1b10321d74e" />
 
 
-## 7. References  
-- **DISA STIG:** Windows 10 STIG V2R5 – WN10-CC-000145  
-- **NIST SP 800-53 Rev 5:** AC-11 – Session Lock  
-
-## 8. Cross References / Mapping  
-- **NIST Rev 5:** AC-11  
-- **CIS Benchmark:** Power Options – Require a password on wakeup  
-- **Comment:** Both NIST and CIS enforce similar session lock and wakeup authentication requirements.  
-
-## 9. Comments  
-Requiring a password on resume from sleep ensures that unattended systems are protected from unauthorized access.  
-
-## 10. Source(s) of Information  
+## 8. Source(s) of Information  
 - DISA STIG Viewer  
 - Microsoft Docs: [Require a password when a computer wakes (Windows 10/11)](https://learn.microsoft.com/en-us/troubleshoot/windows-client/windows-security/require-password-wakeup)  
 
