@@ -4,11 +4,12 @@
 **ID:** WN10-CC-000020  
 **Title:** Windows 10 must be configured to lock the screen after 15 minutes of inactivity.  
 
-## 2. Description  
-Inactive sessions can expose systems to unauthorized use. Configuring automatic lock reduces the attack window.  
+## 2. Description & Rationale 
+Inactive sessions can expose systems to unauthorized use. Configuring automatic lock reduces the attack window. Leaving sessions open allows attackers to access sensitive data. Locking after inactivity enforces secure use. 
 
-## 3. Rationale  
-Leaving sessions open allows attackers to access sensitive data. Locking after inactivity enforces secure use.  
+## 3. Before Remediation
+> <a href="https://ibb.co/ymNqb019"><img src="https://i.ibb.co/8nm9SMpC/image.png" alt="image" border="0"></a>
+  
 
 ## 4. Check Text  
 1. Open **Group Policy Editor** (`gpedit.msc`).  
