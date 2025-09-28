@@ -102,3 +102,38 @@ foreach ($group in $AllowedGroups) {
 }
 
 Write-Host "`n=== Remediation Complete ==="
+
+```
+
+The script succesfully corrected groups are assigned to the user right and removes any unauthorized entries
+<img width="1278" height="794" alt="image" src="https://github.com/user-attachments/assets/5f180fc6-85b0-4b7b-968f-b89489ac1217" />
+
+
+---
+
+## 7. Testing / Verification  
+
+```powershell
+# Verification for WN10-UR-000010
+$UserRight = "SeNetworkLogonRight"
+$AllowedGroups = @("Administrators","Remote Desktop Users")
+
+$currentAssignments = (Get-LocalGroupMember -Group $UserRight -ErrorAction SilentlyContinue | Select-Object -ExpandProperty Name) 2>$null
+
+foreach ($entry in $currentAssignments) {
+    if ($AllowedGroups -contains $entry) {
+        Write-Host "PASS: $entry is authorized."
+    } else {
+        Write-Host "FAIL: $entry is unauthorized."
+    }
+}
+
+```
+
+## 8. References
+
+* DISA STIG Viewer
+* Microsoft Docs: User Rights Assignment
+* NIST SP 800-53 Revision 5 – AC-2, AC-17
+
+
