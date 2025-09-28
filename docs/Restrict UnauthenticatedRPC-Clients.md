@@ -123,6 +123,8 @@ Write-Host "`n=== Verification Complete ==="
  
 3. Nessus / STIG Scan Pass
 
+> <img width="791" height="42" alt="image" src="https://github.com/user-attachments/assets/7d418f71-2ea3-454b-9e16-9ba52afd769c" />
+
 
 ## 8. Source(s) of Information
 
